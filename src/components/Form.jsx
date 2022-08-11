@@ -1,22 +1,27 @@
 import { useState } from "react";
-import useAtuh from "../hooks/useAuth";
+import useAuth from "../hooks/useAuth";
+import { postAPI } from "../helpers/API";
+import { setStorage, readStorage, clearStorage } from "../helpers/LocalStorage";
 
 const Form = () => {
-  const { hola } = useAtuh();
+  const { user, setUser, setLogged } = useAuth();
 
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [discordId, setDiscordId] = useState("");
 
-  const user = {
+  const valuesInput = {
     email,
-    password,
-    id: null,
+    discordId,
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(user);
+    setUser(valuesInput);
+    console.log(await user);
+    const token = await postAPI(valuesInput);
+    setStorage(await token);
+    setLogged(true);
   };
 
   return (
@@ -24,15 +29,15 @@ const Form = () => {
       <form>
         <input
           type="text"
-          placeholder="email"
+          placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
         <input
-          type="password"
-          placeholder="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          type="text"
+          placeholder="Discord"
+          value={discordId}
+          onChange={(e) => setDiscordId(e.target.value)}
         />
         <input type="submit" value="login" onClick={handleSubmit} />
       </form>

@@ -1,11 +1,12 @@
-import { AtuhProvider } from "./context/AuthProvider";
-import Form from "./components/Form";
+import { AuthProvider } from "./context/AuthProvider";
+import useAuth from "./hooks/useAuth";
+import Main from "./components/Main";
 
 function App() {
   return (
-    <AtuhProvider>
-      <Form />
-    </AtuhProvider>
+    <AuthProvider>
+      <Main/>
+    </AuthProvider>
   );
 }
 
