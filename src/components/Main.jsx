@@ -1,28 +1,41 @@
 import { useEffect } from "react";
-import { checkAuth } from "../helpers/API";
+import { TasksProvider } from "../context/TasksProvider";
 import useAuth from "../hooks/useAuth";
-import Form from "./Form";
-import Logged from "./Logged";
+import LoginForm from "./LoginForm";
+import LoggedComponent from "./LoggedComponent";
+import Header from "./Header";
+import AuthService from "../services/authService";
 
 const Main = () => {
-  const { logged, setLogged } = useAuth();
+  const { logged, setLogged, setUser } = useAuth();
+  const authService = new AuthService();
+
+  async function checkAuth() {
+    authService.check().then((res) => {
+      setUser(res);
+      setLogged(true);
+    });
+  }
 
   useEffect(() => {
-    const checkAuthFunction = async () => {
-      const tokenResult = await checkAuth();
-      if (tokenResult) {
-        setLogged(true);
-      }
-    };
-
-    checkAuthFunction();
+    checkAuth();
   }, []);
 
   return (
-    <>
-      {logged ? <Logged /> : null}
-      {!logged ? <Form /> : null}
-    </>
+    <TasksProvider>
+      <Header />
+      {/* {logged ? <LoggedComponent /> : <LoginForm />} */}
+      <LoginForm />
+      {logged ? (
+        <div>
+          <p>Bienvenido</p>
+        </div>
+      ) : (
+        <div>
+          <p>Debes iniciar sesion</p>
+        </div>
+      )}
+    </TasksProvider>
   );
 };
 

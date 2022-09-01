@@ -1,0 +1,51 @@
+{
+    "posts": [
+      {
+        "id": 1,
+        "title": "json-server",
+        "author": "typicode"
+      }
+    ],
+    "comments": [
+      {
+        "id": 1,
+        "body": "some comment",
+        "postId": 1
+      }
+    ],
+    "profile": {
+      "name": "typicode"
+    },
+    "tasks": [
+      {
+        "task": "CSS",
+        "status": 0,
+        "id": 1
+      },
+      {
+        "task": "Responsive design",
+        "status": 1,
+        "id": 2
+      },
+      {
+        "task": "Git",
+        "status": 2,
+        "id": 3
+      },
+      {
+        "id": 5,
+        "task": "JavaScript II",
+        "status": 0
+      },
+      {
+        "task": "Pasar el proyecto a FireStore",
+        "status": 1,
+        "id": "l6a9yk8q0.2bt0dcaxnng"
+      },
+      {
+        "task": "Buscar la forma de crear IDs",
+        "status": 1,
+        "id": "l6u8qm4l0.9q2bmbwfxq"
+      }
+    ]
+  }

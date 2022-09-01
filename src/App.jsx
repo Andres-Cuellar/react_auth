@@ -1,11 +1,23 @@
 import { AuthProvider } from "./context/AuthProvider";
-import useAuth from "./hooks/useAuth";
 import Main from "./components/Main";
+import { useState } from "react";
 
 function App() {
+  const [counter, setCounter] = useState(0);
   return (
     <AuthProvider>
-      <Main/>
+      <Main />
+
+      <div>
+        <p>{counter}</p>
+        <button
+          onClick={() => {
+            setCounter((valor) => valor + 1);
+          }}
+        >
+          +
+        </button>
+      </div>
     </AuthProvider>
   );
 }
